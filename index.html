@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="ja" lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="./styles/default.css" />
+<link rel="stylesheet" type="text/css" href="./styles/default_main.css" />
+
+<title>全角⇔半角 変換ツール</title>
+</head>
+
+<body>
+<div id="g-container">
+
+
+	<div id="g-header">
+		<div id="g-top">
+			<a href=""></a>
+		</div>
+		<div id="g-category">
+			<div>全角⇔半角 変換ツール</div>
+		</div>
+
+	</div>
+
+
+	<div id="g-body">
+		<div id="g-contents">
+		
+		<h1></h1>
+			<p>全角と半角が混在したテキストを統一できます。</p>
+			<noscript><p class="error-message">このサービスをご利用いただくには、<a href="/web-app/support/javascript/">JavaScriptを有効にする</a>必要があります。</p></noscript>
+
+			<p class="accept-message">入力した情報はブラウザでのみ処理され、外部へ送信されません。</p>
+			<form id="text-form" action="">
+				<fieldset>
+					<legend>変換対象のテキスト</legend>
+					<textarea name="text"></textarea>
+					<table class="standard">
+						<caption>文字の種類ごとの変換方法</caption>
+						<tr>
+							<th></th>
+							<th>カナ</th>
+							<th>数字</th>
+							<th>英字</th>
+							<th>ASCII記号</th>
+							<th>非ASCII記号</th>
+							<th>空白</th>
+							<th>一括指定</th>
+						</tr>
+						<tr>
+							<th>全角<small>へ変換</small></th>
+							<td><input type="radio" name="kana" value="full" checked="checked" /></td>
+							<td><input type="radio" name="number" value="full" /></td>
+							<td><input type="radio" name="latin" value="full" /></td>
+							<td><input type="radio" name="symbol" value="full" /></td>
+							<td><input type="radio" name="symbol2" value="full" /></td>
+							<td><input type="radio" name="space" value="full" /></td>
+							<td><a href="javascript:;"><small>すべて</small>全角</a></td>
+						</tr>
+						<tr>
+							<th>半角<small>へ変換</small></th>
+							<td><input type="radio" name="kana" value="half" /></td>
+							<td><input type="radio" name="number" value="half" checked="checked" /></td>
+							<td><input type="radio" name="latin" value="half" checked="checked" /></td>
+							<td><input type="radio" name="symbol" value="half" checked="checked" /></td>
+							<td><input type="radio" name="symbol2" value="half" checked="checked" /></td>
+							<td><input type="radio" name="space" value="half" checked="checked" /></td>
+							<td><a href="javascript:;"><small>すべて</small>半角</a></td>
+						</tr>
+						<tr>
+							<th>変換しない</th>
+							<td><input type="radio" name="kana" value="" /></td>
+							<td><input type="radio" name="number" value="" /></td>
+							<td><input type="radio" name="latin" value="" /></td>
+							<td><input type="radio" name="symbol" value="" /></td>
+							<td><input type="radio" name="symbol2" value="" /></td>
+							<td><input type="radio" name="space" value="" /></td>
+							<td><a href="javascript:;">変換しない</a></td>
+						</tr>
+					</table>
+					<input type="submit" id="submit" value="変換" /><input type="reset" class="reset" value="消去" /><span class="loading" style="display: none">処理中</span>
+				</fieldset>
+			</form>
+			<div style="display: none"><textarea id="result" readonly="readonly"></textarea></div>
+
+		<h2>変換対象の文字</h2>
+			<p>変換対象となるのは下表の文字です。</p>
+			<table class="standard">
+				<tr>
+					<th rowspan="2">カナ</th>
+					<th>全角</th>
+					<td>
+						<p>ア イ ウ エ オ カ キ ク ケ コ サ シ ス セ ソ タ チ ツ テ ト ナ ニ ヌ ネ ノ ハ ヒ フ ヘ ホ マ ミ ム メ モ ヤ ユ ヨ ラ リ ル レ ロ ワ ヲ ン</p>
+						<p>ヴ ガ ギ グ ゲ ゴ ザ ジ ズ ゼ ゾ ダ ヂ ヅ デ ド バ ビ ブ ベ ボ パ ピ プ ペ ポ ァ ィ ゥ ェ ォ ャ ュ ョ ッ</p>
+						<p>ー ◌゙ ◌゚ 、 。 「 」</p>
+					</td>
+				</tr>
+				<tr>
+					<th>半角</th>
+					<td>
+						<p>ｱ ｲ ｳ ｴ ｵ ｶ ｷ ｸ ｹ ｺ ｻ ｼ ｽ ｾ ｿ ﾀ ﾁ ﾂ ﾃ ﾄ ﾅ ﾆ ﾇ ﾈ ﾉ ﾊ ﾋ ﾌ ﾍ ﾎ ﾏ ﾐ ﾑ ﾒ ﾓ ﾔ ﾕ ﾖ ﾗ ﾘ ﾙ ﾚ ﾛ ﾜ ｦ ﾝ</p>
+						<p>ｳﾞ ｶﾞ ｷﾞ ｸﾞ ｹﾞ ｺﾞ ｻﾞ ｼﾞ ｽﾞ ｾﾞ ｿﾞ ﾀﾞ ﾁﾞ ﾂﾞ ﾃﾞ ﾄﾞ ﾊﾞ ﾋﾞ ﾌﾞ ﾍﾞ ﾎﾞ ﾊﾟ ﾋﾟ ﾌﾟ ﾍﾟ ﾎﾟ ｧ ｨ ｩ ｪ ｫ ｬ ｭ ｮ ｯ</p>
+						<p>ｰ ﾞ ﾟ ､ ｡ ｢ ｣</p>
+					</td>
+				</tr>
+				<tr>
+					<th rowspan="2">数字</th>
+					<th>全角</th>
+					<td>０ １ ２ ３ ４ ５ ６ ７ ８ ９</td>
+				</tr>
+				<tr>
+					<th>半角</th>
+					<td>0 1 2 3 4 5 6 7 8 9</td>
+				</tr>
+				<tr>
+					<th rowspan="2">英字</th>
+					<th>全角</th>
+					<td>
+						<p>Ａ Ｂ Ｃ Ｄ Ｅ Ｆ Ｇ Ｈ Ｉ Ｊ Ｋ Ｌ Ｍ Ｎ Ｏ Ｐ Ｑ Ｒ Ｓ Ｔ Ｕ Ｖ Ｗ Ｘ Ｙ Ｚ</p>
+						<p>ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ ｉ ｊ ｋ ｌ ｍ ｎ ｏ ｐ ｑ ｒ ｓ ｔ ｕ ｖ ｗ ｘ ｙ ｚ</p>
+					</td>
+				</tr>
+				<tr>
+					<th>半角</th>
+					<td>
+						<p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+						<p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+					</td>
+				</tr>
+				<tr>
+					<th rowspan="2">ASCII記号</th>
+					<th>全角</th>
+					<td>！ ＂ ＃ ＄ ％ ＆ ＇ （ ） ＊ ＋ ， － ． ／ ： ； ＜ ＝ ＞ ？ ＠ ［ ＼ ］ ＾ ＿ ｀ ｛ ｜ ｝ ～</td>
+				</tr>
+				<tr>
+					<th>半角</th>
+					<td>! " # $ % &amp; ' ( ) * + , - . / : ; &lt; = &gt; ? @ [ \ ] ^ _ ` { | } ~</td>
+				</tr>
+				<tr>
+					<th rowspan="2">非ASCII記号</th>
+					<th>全角</th>
+					<td>｟ ｠ ￠ ￡ ￢ ￣ ￤ ￥ ￦ │ ← ↑ → ↓ ■ ○ ・</td>
+				</tr>
+				<tr>
+					<th>半角</th>
+					<td>⦅ ⦆ ¢ £ ¬ ¯ ¦ ¥ ₩ ￨ ￩ ￪ ￫ ￬ ￭ ￮ ･</td>
+				</tr>
+				<tr>
+					<th rowspan="2">空白</th>
+					<th>全角</th>
+					<td>全角スペース <small>(U+3000)</small></td>
+				</tr>
+				<tr>
+					<th>半角</th>
+					<td>半角スペース <small>(U+0020)</small></td>
+				</tr>
+			</table>
+<!--
+			<div id="g-ad"></div>
+
+		<div id="bottom-nav">
+
+			<ul>
+				<li><a href=""></a></li>
+			</ul>
+
+		</div>
+		
+		</div>
+		<div id="g-side">
+			<ul>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+				<li><a href=""></a>
+					<ul>
+						<li><a href=""></a></li>
+					</ul>
+				</li>
+				<li><a href=""></a>
+					<ul>
+						<li><a href=""></a></li>
+					</ul>
+				</li>
+				<li><a href=""></a></li>
+				<li><a href=""></a>
+					<ul>
+						<li><a href=""></a></li>
+						<li><a href=""></a></li>
+					</ul>
+				</li>
+				<li><a href=""></a></li>
+			</ul>
+		</div>
+	</div>
+-->
+	<div id="g-footer">
+<!--
+		<div id="g-link">
+			<ul>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+			</ul>
+		</div>
+-->
+	</div>
+
+</div>
+
+
+<script type="text/javascript" src="./js/text.js"></script>
+<script type="text/javascript" src="./js/default_main.js"></script>
+<script type="text/javascript" src="./js/default.js"></script>
+</body>
+
+</html>
